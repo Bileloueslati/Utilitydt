@@ -1,0 +1,59 @@
+import fs from "fs";
+
+const inputPath = "./tokens/semantic.json";
+const outputLight = "./tokens/semantic-light.json";
+const outputDark = "./tokens/semantic-dark.json";
+
+const input = JSON.parse(fs.readFileSync(inputPath, "utf8"));
+
+function normalizeReference(ref) {
+  if (typeof ref !== "string") return ref;
+
+  return ref
+    .replace("{Primitive.", "{primitive.")
+    .replace(/\.Neutral(\d+)/g, ".neutral.$1")
+    .replace(/\.DarkNeutral(\d+)/g, ".dark-neutral.$1")
+    .replace(/\.Green(\d+)/g, ".green.$1")
+    .replace(/\.Red(\d+)/g, ".red.$1");
+}
+
+function transformNode(node) {
+  const light = {};
+  const dark = {};
+
+  for (const key in node) {
+    const value = node[key];
+
+    if (value?.$value && typeof value.$value === "object") {
+
+      light[key] = {
+        value: normalizeReference(value.$value.Light)
+      };
+
+      dark[key] = {
+        value: normalizeReference(value.$value.Dark)
+      };
+
+    } else if (value?.$value) {
+
+      light[key] = { value: value.$value };
+      dark[key] = { value: value.$value };
+
+    } else if (typeof value === "object") {
+
+      const { light: l, dark: d } = transformNode(value);
+
+      light[key] = l;
+      dark[key] = d;
+    }
+  }
+
+  return { light, dark };
+}
+
+const { light, dark } = transformNode(input);
+
+fs.writeFileSync(outputLight, JSON.stringify(light, null, 2));
+fs.writeFileSync(outputDark, JSON.stringify(dark, null, 2));
+
+console.log("✅ semantic-light.json et semantic-dark.json générés");
