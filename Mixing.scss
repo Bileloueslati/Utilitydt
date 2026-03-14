@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+$button-variants: (
+  primary: brand,
+  danger: danger,
+  default: neutral
+);
+
+button {
+
+  @apply font-openSans px-3 py-2 text-[14px];
+  color: var(--color-text-inverse);
+  border-radius: 4px;
+
+  @each $variant, $token in $button-variants {
+
+    &.#{$variant}:not(.selected) {
+
+      background-color: var(--color-background-#{$token}-bold-default);
+
+      &:hover {
+        background-color: var(--color-background-#{$token}-bold-hovered);
+      }
+
+      &:active {
+        background-color: var(--color-background-#{$token}-bold-pressed);
+      }
+
+    }
+
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-border-focused);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background-color: var(--color-background-disabled);
+    color: var(--color-text-disabled);
+  }
+
+  &.selected {
+    background-color: var(--color-background-selected-default);
+    color: var(--color-text-selected);
+  }
+
+}
