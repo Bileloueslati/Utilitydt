@@ -1,0 +1,40 @@
+button {
+
+  @each $variant, $config in $button-variants {
+
+    $token: map-get($config, token);
+    $weight: map-get($config, weight);
+
+    &.#{$variant}:not(.selected) {
+
+      @if $weight == null {
+
+        background-color: var(--color-background-#{$token}-default);
+
+        &:hover {
+          background-color: var(--color-background-#{$token}-hovered);
+        }
+
+        &:active {
+          background-color: var(--color-background-#{$token}-pressed);
+        }
+
+      } @else {
+
+        background-color: var(--color-background-#{$token}-#{$weight}-default);
+
+        &:hover {
+          background-color: var(--color-background-#{$token}-#{$weight}-hovered);
+        }
+
+        &:active {
+          background-color: var(--color-background-#{$token}-#{$weight}-pressed);
+        }
+
+      }
+
+    }
+
+  }
+
+}
