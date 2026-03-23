@@ -1,0 +1,8 @@
+{
+  "proxies": {
+    "default": {
+      "httpProxy": "http://uid:mdp@vip-svc-sra-prx.fr.xcp.net.intra:3132",
+      "httpsProxy": "http://uid:mdp@vip-svc-sra-prx.fr.xcp.net.intra:3132"
+    }
+  }
+}
