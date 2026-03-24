@@ -1,0 +1,26 @@
+import { app } from "./app";
+import { prisma } from "./infrastructure/database/prisma";
+
+const PORT = process.env.PORT || 3000;
+
+async function start() {
+  let retries = 5;
+
+  while (retries) {
+    try {
+      await prisma.$connect();
+      console.log("✅ DB connected");
+      break;
+    } catch (err) {
+      console.log("⏳ DB not ready, retrying...");
+      retries--;
+      await new Promise(res => setTimeout(res, 2000));
+    }
+  }
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+start();
