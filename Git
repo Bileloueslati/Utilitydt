@@ -1,0 +1,2 @@
+git reset --hard "@stellar/core@0.34.0"
+git push origin develop --force-with-lease
