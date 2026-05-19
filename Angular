@@ -1,0 +1,26 @@
+import { reactOutputTarget } from '@stencil/react-output-target';
+import { angularOutputTarget } from '@stencil/angular-output-target';
+
+export const config: Config = {
+  namespace: 'stellar',
+
+  outputTargets: [
+    {
+      type: 'dist',
+    },
+
+    reactOutputTarget({
+      componentCorePackage: '@stellar/core',
+      proxiesFile: '../react/src/components.ts',
+      includeDefineCustomElements: true,
+    }),
+
+    angularOutputTarget({
+      componentCorePackage: '@stellar/core',
+      directivesProxyFile:
+        '../angular/src/directives/proxies.ts',
+      directivesArrayFile:
+        '../angular/src/directives/index.ts',
+    }),
+  ],
+};
