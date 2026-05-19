@@ -1,0 +1,9 @@
+angularOutputTarget({
+  componentCorePackage: '@stellar/core',
+
+  directivesProxyFile:
+    '../angular/projects/stellar/src/lib/stencil-generated/components.ts',
+
+  directivesArrayFile:
+    '../angular/projects/stellar/src/lib/stencil-generated/index.ts',
+}),
