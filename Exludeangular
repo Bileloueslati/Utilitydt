@@ -1,0 +1,12 @@
+
+const iconsDir = join(__dirname, 'src/components/icons');
+
+const excludedIcons = readdirSync(iconsDir);
+
+
+excludeComponents: excludedIcons,
+
+
+
+import { readdirSync } from 'fs';
+import { join } from 'path';
