@@ -1,0 +1,7 @@
+npm config set cafile ""
+npm config set strict-ssl false
+
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+export npm_config_strict_ssl=false
+
+npm install
