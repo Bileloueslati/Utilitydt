@@ -1,0 +1,5 @@
+if (this.cardTitle && !this.cols.some((col) => col.field === this.cardTitle)) {
+  console.warn(
+    `[stellar-datatable-mobile] The "cardTitle" field "${this.cardTitle}" does not exist in the provided columns. Falling back to the first available field.`,
+  );
+}
