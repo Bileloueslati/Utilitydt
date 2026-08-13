@@ -1,0 +1,8 @@
+/**
+ * Defines the field used as the primary title of each card.
+ * This allows the card title to be independent from the column order
+ * and does not require the field to be the first column.
+ *
+ * @type {string}
+ */
+@Prop() cardTitle?: string;
