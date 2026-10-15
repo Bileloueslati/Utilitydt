@@ -1,0 +1,33 @@
+Exposition des tokens de thème en JavaScript/TypeScript
+
+Présentation
+
+Les tokens du thème Stellar Design System sont désormais accessibles via une API publique JavaScript/TypeScript, générée automatiquement à partir des fichiers CSS existants.
+
+Cette évolution permet aux développeurs de réutiliser les tokens du Design System directement dans leur code applicatif, sans avoir à redéfinir manuellement les valeurs.
+
+Évolutions apportées
+
+* Génération automatique : création des objets de thème à partir de light.css et dark.css, sans duplication manuelle des tokens.
+* Structure hiérarchique : organisation des variables CSS en objets imbriqués, selon leurs catégories, telles que color, elevation et numeric.
+* Prise en charge des thèmes clair et sombre : exposition des deux variantes avec une structure commune et des valeurs spécifiques à chaque mode.
+* Exports publics : mise à disposition du thème généré depuis @stellar/core et réexport depuis @stellar/react.
+* Source de vérité unique : conservation des fichiers CSS comme référence pour garantir la cohérence entre les styles et les valeurs exposées en JavaScript/TypeScript.
+
+Exemple d’utilisation
+
+import { theme } from '@stellar/react';
+const textColor = theme.light.color.text.default;
+const darkTextColor = theme.dark.color.text.default;
+
+Bénéfices
+
+* Accès direct aux tokens du Design System depuis JavaScript et TypeScript.
+* Autocomplétion et typage des propriétés du thème.
+* Réduction des valeurs codées en dur et des duplications.
+* API cohérente entre les packages core et react.
+* Maintenance simplifiée grâce à la génération automatique des thèmes.
+
+Fonctionnement
+
+Un script extrait les variables des fichiers CSS clair et sombre, puis génère les objets de thème correspondants. Ces objets sont ensuite exposés via les points d’entrée publics des packages, tout en conservant les fichiers CSS comme source de référence.
