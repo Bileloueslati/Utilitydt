@@ -1,0 +1,59 @@
+
+# Exposition des tokens de thème en JavaScript/TypeScript
+
+## Présentation
+
+Les tokens du Stellar Design System sont désormais accessibles via une API publique JavaScript/TypeScript, générée automatiquement à partir des fichiers CSS existants.
+
+Cette évolution permet aux développeurs de réutiliser les tokens du Design System directement dans leur code applicatif, sans redéfinir manuellement les valeurs.
+
+## Évolutions apportées
+
+- **Génération automatique :** création des objets de thème à partir des tokens CSS.
+- **Structure hiérarchique :** organisation des variables CSS en objets imbriqués, selon leurs catégories (`color`, `spacing`, `shape`, `elevation`, etc.).
+- **Prise en charge des thèmes clair et sombre :** exposition des variantes `theme.light` et `theme.dark`, avec les valeurs définies dans leurs fichiers CSS respectifs.
+- **Références CSS dynamiques :** exposition de `theme.current`, qui fournit les références `var(--...)` afin que le navigateur applique les valeurs correspondant au thème actif.
+- **Exports publics :** mise à disposition du thème depuis `@stellar/core` et réexport depuis `@stellar/react`.
+- **Source de vérité unique :** conservation des fichiers CSS comme référence pour garantir la cohérence des tokens.
+
+## Exemple d’utilisation
+
+```ts
+import { theme } from '@stellar/react';
+
+// Direct values
+const lightText = theme.light.color.text.default;
+const darkText = theme.dark.color.text.default;
+
+// CSS variable reference
+const currentText = theme.current.color.text.default;
+```
+
+### Utilisation dans un style React
+
+```tsx
+<div
+  style={{
+    color: theme.current.color.text.default,
+  }}
+>
+  Texte adapté au thème actif
+</div>
+```
+
+## Bénéfices
+
+- Accès direct aux tokens du Design System depuis JavaScript et TypeScript.
+- Autocomplétion et typage des propriétés du thème.
+- Réduction des valeurs codées en dur et des duplications.
+- Distinction claire entre valeurs explicites et références aux variables CSS.
+- API cohérente entre les packages `core` et `react`.
+- Maintenance simplifiée grâce à la génération automatique des thèmes.
+
+## Fonctionnement
+
+Un script extrait les variables des fichiers CSS clair et sombre, valide leur cohérence et génère le module TypeScript correspondant.
+
+Les objets `light` et `dark` exposent les valeurs directes des tokens, tandis que `current` expose des références `var(--...)`. Le navigateur résout ces références selon les variables CSS actives.
+
+Le fichier généré est ensuite exposé via les points d’entrée publics des packages, sans modification manuelle du code généré.
