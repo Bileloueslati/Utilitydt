@@ -1,0 +1,18 @@
+Bonjour,
+
+Concernant l’alerte CVE-2026-93753 / GHSA-gcqx-w48m-w2h4 sur deepmerge, voici les éléments de mon analyse sur le monorepo stellar-design-system.
+
+* Dépendance concernée : deepmerge@4.3.1, présente indirectement via @stellar/core → style-dictionary → @bundled-es-modules/deepmerge.
+* Version disponible : notre registre Artifactory expose actuellement 4.3.1 comme dernière version officielle. La version 4.3.2 n’est pas disponible.
+* Correctif upstream : une proposition de correctif a été publiée dans la PR #274 sur GitHub. Elle ajoute notamment un contrôle explicite des clés __proto__. Cependant, cette PR a été fermée sans être intégrée à la branche principale du dépôt. Il n’y a donc pas de version officielle npm corrigée que je puisse appliquer directement à ce stade.
+* Tests de remédiation : j’ai essayé un remplacement via overrides avec le fork @stackline/deepmerge@1.1.0, mais cela a rendu l’arbre des dépendances npm invalide (ELSPROBLEMS). J’ai retiré cet override et vérifié que npm ls deepmerge ne signale plus d’arbre invalide. La vulnérabilité potentielle reste toutefois à traiter.
+
+Pouvez-vous confirmer si cette alerte est considérée comme applicable à notre contexte et quelle stratégie est recommandée : attendre une version officielle corrigée, remplacer la dépendance, appliquer un patch contrôlé ou documenter une exception après analyse du risque ?
+
+Liens :
+
+* Avis GitHub GHSA
+* Issue upstream #273
+* PR de correctif #274
+
+Merci.
