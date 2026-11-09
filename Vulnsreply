@@ -1,0 +1,17 @@
+Bonjour,
+
+Suite à votre retour, nous avons effectué plusieurs mises à jour au niveau des dépendances du monorepo Stellar Design System.
+
+Les corrections réalisées via les overrides du package.json sont les suivantes :
+
+* picomatch : forçage de la version 2.3.2.
+* brace-expansion : forçage de la version 5.0.12 pour les dépendances concernées (minimatch, nx et @bundled-es-modules/glob).
+* glob : mise à jour vers la version 13.0.6 pour @bundled-es-modules/glob.
+
+Nous avons également procédé à une réinstallation des dépendances et vérifié leur résolution avec npm ls.
+
+Concernant qs, la version 6.16.1 est actuellement résolue dans l’arbre des dépendances. La version 6.16.2 recommandée n’est pas disponible dans notre registre npm (retour 404). Ce point reste donc à clarifier avant de finaliser la correction.
+
+Nous poursuivons les vérifications afin de garantir la compatibilité des mises à jour avec l’ensemble des packages du monorepo.
+
+Cordialement,
